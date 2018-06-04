@@ -1,7 +1,9 @@
 package com.cyr1en.mcutils.logger;
 
+import com.cyr1en.mcutils.utils.FileUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.util.logging.Level;
 
@@ -11,7 +13,8 @@ public class Logger {
     public static final String ANSI_GOLD_FOREGROUND = "\033[33m";
     public static final String ANSI_RED_FOREGROUND = "\033[31m";
 
-    private static String prefix = "[MineCordBot] ";
+    private static final PluginDescriptionFile pld = FileUtil.getPluginDescriptionFile();
+    private static String prefix = pld.getName();
     private static boolean debugMode = false;
 
     public Logger(String prefix) {
@@ -19,7 +22,7 @@ public class Logger {
     }
 
     public static void log(Level level, String msg) {
-        String pre = debugMode ? "[MCB-Debug] " : getPrefix();
+        String pre = debugMode ? "[" + prefix + "-Debug] " : getPrefix();
         Bukkit.getLogger().log(level, pre + msg);
     }
 

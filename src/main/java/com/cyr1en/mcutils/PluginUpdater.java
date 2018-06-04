@@ -1,6 +1,7 @@
 package com.cyr1en.mcutils;
 
 import com.cyr1en.mcutils.logger.Logger;
+import com.cyr1en.mcutils.utils.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -8,14 +9,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
-import java.util.zip.ZipFile;
 
 public class PluginUpdater {
 
@@ -106,7 +108,7 @@ public class PluginUpdater {
         ArrayList<File> fList = new ArrayList<>(Arrays.asList(files == null ? new File[]{} : files));
         for (File f : fList) {
             try {
-                if (isJarFile(f)) {
+                if (FileUtil.isJarFile(f)) {
                     InputStream inputStream = plugin.getClass().getResourceAsStream("/plugin.yml");
                     Yaml yaml = new Yaml();
                     HashMap<String, String> manifest = yaml.load(inputStream);
@@ -124,32 +126,6 @@ public class PluginUpdater {
                 e.printStackTrace();
             }
         }
-    }
-
-    private boolean isJarFile(File file) throws IOException {
-        if (!isZipFile(file)) {
-            return false;
-        }
-        ZipFile zip = new ZipFile(file);
-        boolean manifest = zip.getEntry("META-INF/MANIFEST.MF") != null;
-        zip.close();
-        return manifest;
-    }
-
-    private boolean isZipFile(File file) throws IOException {
-        if (file.isDirectory()) {
-            return false;
-        }
-        if (!file.canRead()) {
-            throw new IOException("Cannot read file " + file.getAbsolutePath());
-        }
-        if (file.length() < 4) {
-            return false;
-        }
-        DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-        int test = in.readInt();
-        in.close();
-        return test == 0x504b0304;
     }
 
     private String checkChangeLog() {

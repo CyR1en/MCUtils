@@ -116,7 +116,7 @@ public class CommandDispatcher {
                     if (spl.isEmpty())
                         params.add(null);
                     else {
-                        org.bukkit.command.Command cmd = commandMap.getCommand(spl) == null ? null : commandMap.getCommand(spl);
+                        org.bukkit.command.Command cmd = commandMap.getCommand(spl);
                         params.add(cmd);
                     }
                 } else {
