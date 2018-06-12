@@ -20,7 +20,7 @@ import org.bukkit.Bukkit;
  *
  * @param <T> Type of Plugin that's going to get hooked.
  */
-public class PluginHook<T> implements IPluginHook {
+public class PluginHook<T> implements IPluginHook{
 
     protected String name = "";
 
