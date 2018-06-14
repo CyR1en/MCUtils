@@ -1,9 +1,16 @@
 package com.cyr1en.mcutils;
 
-import com.cyr1en.mcutils.logger.Logger;
 import com.cyr1en.mcutils.utils.FileUtil;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,6 +64,7 @@ public class PluginUpdater {
     }
 
     public boolean needsUpdate() {
+        queryUpdateData();
         if (canceled)
             return false;
         if (newVersionAvailable()) {
@@ -90,8 +98,8 @@ public class PluginUpdater {
                 moveOldPluginJar();
                 FileUtils.copyURLToFile(download, file);
                 if (out) {
-                    Logger.info("Successfully downloaded update");
-                    Logger.info("Restart server to apply changes");
+                    Bukkit.getLogger().info("Successfully downloaded update");
+                    Bukkit.getLogger().info("Restart server to apply changes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -134,7 +142,58 @@ public class PluginUpdater {
         return changeLog.length() > 32 ? "Changelog too long, visit " + url.toString() + " to read it." : changeLog;
     }
 
+
     public void setOut(boolean out) {
         this.out = out;
+    }
+
+    public String getChangeLog() {
+        queryUpdateData();
+        return changeLog;
+    }
+
+    public String getShortChangeLog() {
+        queryUpdateData();
+        return checkChangeLog();
+    }
+
+    public String getVersion() {
+        queryUpdateData();
+        return version;
+    }
+
+    public String getDownloadURL() {
+        queryUpdateData();
+        return downloadURL;
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onJoin(PlayerJoinEvent event) {
+        if(!newVersionAvailable())
+            return;
+        String v = version.replaceAll("[a-zA-z: ]", "");
+        if(event.getPlayer().isOp()) {
+            try {
+                if(Class.forName("org.spigotmc.SpigotConfig") != null) {
+                    BaseComponent[] textComponent = new ComponentBuilder("[")
+                            .color(ChatColor.GOLD)
+                            .append("CommandPrompter")
+                            .color(ChatColor.GREEN)
+                            .append("]")
+                            .color(ChatColor.GOLD)
+                            .append(" A new update is available: ")
+                            .color(ChatColor.AQUA)
+                            .append(v)
+                            .color(ChatColor.YELLOW)
+                            .event(new ClickEvent(ClickEvent.Action.OPEN_URL, downloadURL))
+                            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click here to update").create()))
+                            .create();
+                    event.getPlayer().spigot().sendMessage(textComponent);
+                }
+            } catch (ClassNotFoundException e) {
+                String msg = org.bukkit.ChatColor.translateAlternateColorCodes('&', "&6[&aCommandPrmpter&6] &bA new update is available: &e" + v);
+                event.getPlayer().sendRawMessage(msg);
+            }
+        }
     }
 }
