@@ -37,10 +37,10 @@ public class Initializer {
             for (Field field : fields) {
                 if(field.isAnnotationPresent(Ignore.class))
                     continue;
+                field.setAccessible(true);
                 Class type = field.getType();
                 Object v = field.get(clazz);
                 if (!interrupted && v == null) {
-                    field.setAccessible(true);
                     if (type.equals(boolean.class))
                         field.set(clazz, false);
                     else if (type.isPrimitive())
