@@ -15,7 +15,7 @@ public class Logger {
     private static boolean debugMode = false;
 
     public static void init(String prefix){
-        Logger.prefix = prefix;
+        Logger.prefix = String.format("[%s]", prefix);
     }
     public static void log(Level level, String msg) {
         String pre = debugMode ? "[" + prefix + "-Debug] " : getPrefix();
