@@ -1,10 +1,10 @@
-package com.cyr1en.mcutils.utils.reflection.annotation.process;
+package com.cyr1en.mcutils.initializers.annotation.process;
 
+import com.cyr1en.mcutils.initializers.Initializable;
+import com.cyr1en.mcutils.initializers.NegativeComparator;
+import com.cyr1en.mcutils.initializers.annotation.Ignore;
+import com.cyr1en.mcutils.initializers.annotation.Initialize;
 import com.cyr1en.mcutils.logger.Logger;
-import com.cyr1en.mcutils.utils.reflection.NegativeComparator;
-import com.cyr1en.mcutils.utils.reflection.Initializable;
-import com.cyr1en.mcutils.utils.reflection.annotation.Ignore;
-import com.cyr1en.mcutils.utils.reflection.annotation.Initialize;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -64,10 +64,11 @@ public class Initializer {
       if (!interrupted)
         try {
           method.setAccessible(true);
-          Logger.debug("Invoking " + method.getName() + "...");
+          Logger.debug("Invoking %s...", method.getName());
           method.invoke(clazz);
+          Logger.debug("Successfully invoked %s", method.getName());
         } catch (IllegalAccessException | InvocationTargetException e) {
-          Logger.debug("Failed to invoke " + method.getName());
+          Logger.debug("Failed to invoke %s", method.getName());
           e.printStackTrace();
         }
 

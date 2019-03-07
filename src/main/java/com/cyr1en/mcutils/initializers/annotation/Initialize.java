@@ -1,4 +1,4 @@
-package com.cyr1en.mcutils.utils.reflection.annotation;
+package com.cyr1en.mcutils.initializers.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

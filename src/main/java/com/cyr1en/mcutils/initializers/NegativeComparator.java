@@ -1,4 +1,4 @@
-package com.cyr1en.mcutils.utils.reflection;
+package com.cyr1en.mcutils.initializers;
 
 import java.util.Comparator;
 

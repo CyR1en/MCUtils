@@ -1,4 +1,4 @@
-package com.cyr1en.mcutils.utils.reflection.annotation;
+package com.cyr1en.mcutils.initializers.annotation;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
