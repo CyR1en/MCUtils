@@ -5,5 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Initialize {
-    int priority();
+    int priority() default -1;
+    //Condition conditional() default Condition.IGNORE;
 }

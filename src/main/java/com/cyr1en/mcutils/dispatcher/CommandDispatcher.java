@@ -15,6 +15,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.SimplePluginManager;
 
@@ -167,7 +168,8 @@ public class CommandDispatcher {
             try {
                 Field field = SimplePluginManager.class.getDeclaredField("commandMap");
                 field.setAccessible(true);
-
+                SimpleCommandMap smap = (SimpleCommandMap) field.get(Bukkit.getServer().getPluginManager());
+                smap.reg
                 map = (CommandMap) field.get(Bukkit.getServer().getPluginManager());
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 Logger.err("Problem getting the command map!");
