@@ -169,7 +169,6 @@ public class CommandDispatcher {
                 Field field = SimplePluginManager.class.getDeclaredField("commandMap");
                 field.setAccessible(true);
                 SimpleCommandMap smap = (SimpleCommandMap) field.get(Bukkit.getServer().getPluginManager());
-                smap.reg
                 map = (CommandMap) field.get(Bukkit.getServer().getPluginManager());
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 Logger.err("Problem getting the command map!");
