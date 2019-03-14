@@ -135,11 +135,18 @@ public class Config {
     public void saveConfig() {
         String config = this.config.saveToString();
         manager.saveConfig(config, this.file);
-
     }
 
     public Set<String> getKeys() {
         return this.config.getKeys(false);
+    }
+
+    public Set<String> getKeys(boolean b) {
+        return this.config.getKeys(b);
+    }
+
+    public FileConfiguration getFileConfiguration() {
+        return this.config;
     }
 
     @Override

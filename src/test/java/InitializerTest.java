@@ -2,6 +2,8 @@ import com.cyr1en.mcutils.initializers.Initializable;
 import com.cyr1en.mcutils.initializers.annotation.Initialize;
 import com.cyr1en.mcutils.initializers.annotation.process.Initializer;
 
+import java.util.UUID;
+
 public class InitializerTest implements Initializable {
 
   private InitializerTest() {
@@ -36,7 +38,13 @@ public class InitializerTest implements Initializable {
   public static void main(String[] args) {
     System.out.println(Integer.compare(-1,1));
     System.out.println(Integer.compare(4,3));
-    new InitializerTest();
+    UUID uuid = UUID.randomUUID();
+    System.out.println(uuid);
+    String stripped = uuid.toString().replaceAll("-", "");
+    System.out.println(stripped);
+    UUID newUUID = UUID.fromString(stripped.replaceFirst( "([0-9a-fA-F]{8})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]+)", "$1-$2-$3-$4-$5" ));
+    System.out.println(newUUID);
+    //new InitializerTest();
   }
 
 
