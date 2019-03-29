@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCUtils.iml" filepath="$PROJECT_DIR$/.idea/modules/MCUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCUtils.iml" filepath="$PROJECT_DIR$/.idea/modules/MCUtils.iml" group="MCUtils" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCUtils_main.iml" filepath="$PROJECT_DIR$/.idea/modules/MCUtils_main.iml" group="MCUtils" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MCUtils_test.iml" filepath="$PROJECT_DIR$/.idea/modules/MCUtils_test.iml" group="MCUtils" />
     </modules>

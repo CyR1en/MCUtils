@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'maven'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
 group 'com.cyr1en'

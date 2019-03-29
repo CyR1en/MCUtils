@@ -20,26 +20,26 @@ public class Logger {
         Logger.prefix = String.format("[%s]", prefix);
     }
 
-    public static void log(Level level, String msg, String... args) {
+    public static void log(Level level, String msg, Object... args) {
         String pre = debugMode ? "[" + plainPrefix + "-Debug] " : getPrefix();
         if(msg.contains("%s"))
             msg = String.format(msg, (Object[]) args);
         Bukkit.getLogger().log(level, pre + msg);
     }
 
-    public static void info(String msg, String... args) {
+    public static void info(String msg, Object... args) {
         log(Level.INFO, msg, args);
     }
 
-    public static void warn(String msg, String... args) {
+    public static void warn(String msg, Object... args) {
         log(Level.WARNING, ANSI_GOLD_FOREGROUND + msg + ANSI_RESET, args);
     }
 
-    public static void err(String msg, String... args) {
+    public static void err(String msg, Object... args) {
         log(Level.SEVERE, ANSI_RED_FOREGROUND + msg + ANSI_RESET, args);
     }
 
-    public static void debug(String msg, String... args) {
+    public static void debug(String msg, Object... args) {
         if (debugMode)
             log(Level.INFO, ANSI_GOLD_FOREGROUND + msg + ANSI_RESET, args);
     }
