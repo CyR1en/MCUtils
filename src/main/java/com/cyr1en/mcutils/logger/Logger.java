@@ -17,7 +17,7 @@ public class Logger {
 
     public static void init(String prefix){
         Logger.plainPrefix = prefix;
-        Logger.prefix = String.format("[%s]", prefix);
+        Logger.prefix = String.format("[%s] ", prefix);
     }
 
     public static void log(String prefix, Level level, String msg, Object... args) {
@@ -45,7 +45,7 @@ public class Logger {
 
     public static void debug(String msg, Object... args) {
         if (debugMode) {
-            String pre = String.format("[%s-debug]", plainPrefix);
+            String pre = String.format("[%s-debug] ", plainPrefix);
             log(pre, Level.INFO, ANSI_GOLD_FOREGROUND + msg + ANSI_RESET, args);
         }
     }
