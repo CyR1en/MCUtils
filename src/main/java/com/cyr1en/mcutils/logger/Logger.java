@@ -7,9 +7,9 @@ import java.util.logging.Level;
 
 public class Logger {
 
-    public static final String RESET = "&r";
-    public static final String GOLD = "&6";
-    public static final String RED = "&c";
+    public static final String ANSI_RESET = "\u001b[0m";
+    public static final String ANSI_GOLD_FOREGROUND = "\u001b[0;33m";
+    public static final String ANSI_RED_FOREGROUND = "\u001b[0;31m";
 
     private static String prefix = "";
     private static String plainPrefix = "";
@@ -24,7 +24,7 @@ public class Logger {
         String pre = prefix == null ? getPrefix() : prefix;
         if(msg.contains("%s"))
             msg = String.format(msg, (Object[]) args);
-        Bukkit.getLogger().log(level, ChatColor.translateAlternateColorCodes('&', pre + msg));
+        Bukkit.getLogger().log(level, pre + msg);
     }
 
     public static void log(Level level, String msg, Object... args) {
@@ -36,17 +36,17 @@ public class Logger {
     }
 
     public static void warn(String msg, Object... args) {
-        log(Level.WARNING, GOLD + msg + RESET, args);
+        log(Level.WARNING, ANSI_GOLD_FOREGROUND + msg + ANSI_RESET, args);
     }
 
     public static void err(String msg, Object... args) {
-        log(Level.SEVERE, RED + msg + RESET, args);
+        log(Level.SEVERE, ANSI_RED_FOREGROUND + msg + ANSI_RESET, args);
     }
 
     public static void debug(String msg, Object... args) {
         if (debugMode) {
             String pre = String.format("[%s-debug] ", plainPrefix);
-            log(pre, Level.INFO, GOLD + msg + RESET, args);
+            log(pre, Level.INFO, ANSI_GOLD_FOREGROUND + msg + ANSI_RESET, args);
         }
     }
 
