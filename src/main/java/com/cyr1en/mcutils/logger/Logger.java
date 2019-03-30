@@ -7,7 +7,7 @@ import java.util.logging.Level;
 
 public class Logger {
 
-    public static final String ANSI_RESET = "\u001b[0m";
+    public static final String ANSI_RESET = "\u001b[m";
     public static final String ANSI_GOLD_FOREGROUND = "\u001b[0;33m";
     public static final String ANSI_RED_FOREGROUND = "\u001b[0;31m";
 
