@@ -7,9 +7,9 @@ import java.util.logging.Level;
 
 public class Logger {
 
-    public static final String ANSI_RESET = "\033[0m";
-    public static final String ANSI_GOLD_FOREGROUND = "\033[33m";
-    public static final String ANSI_RED_FOREGROUND = "\033[31m";
+    public static final String ANSI_RESET = "\u001b[0m";
+    public static final String ANSI_GOLD_FOREGROUND = "\u001b[33m";
+    public static final String ANSI_RED_FOREGROUND = "\u001b[31m";
 
     private static String prefix = "";
     private static String plainPrefix = "";
