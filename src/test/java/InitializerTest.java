@@ -44,7 +44,7 @@ public class InitializerTest implements Initializable {
     System.out.println(stripped);
     UUID newUUID = UUID.fromString(stripped.replaceFirst( "([0-9a-fA-F]{8})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]{4})([0-9a-fA-F]+)", "$1-$2-$3-$4-$5" ));
     System.out.println(newUUID);
-    //new InitializerTest();
+    new InitializerTest();
   }
 
 

@@ -21,7 +21,7 @@ public class Initializer {
   private static boolean interrupted = false;
   private static boolean finished = false;
 
-  public static void initAll(Initializable clazz) {
+  public synchronized static void initAll(Initializable clazz) {
     initFields(clazz);
     initMethods(clazz);
     finished = true;
@@ -35,7 +35,7 @@ public class Initializer {
     return finished;
   }
 
-  public static void initFields(Initializable clazz) {
+  public synchronized static void initFields(Initializable clazz) {
     try {
       Field[] fields = clazz.getClass().getDeclaredFields();
       for (Field field : fields) {
@@ -58,7 +58,7 @@ public class Initializer {
     }
   }
 
-  public static void initMethods(Initializable clazz) {
+  public synchronized static void initMethods(Initializable clazz) {
     TreeMap<Integer, Method> methods = prioritizedMethods(clazz.getClass().getDeclaredMethods());
     methods.forEach((priority, method) -> {
       if (!interrupted)
